@@ -2,13 +2,29 @@ package org.assignments.day1;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.Scanner;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Assignment2 {
 
     public static void main(String[] args) {
+    	Properties dbProperty = new Properties();
+    	try {
+			dbProperty.load(new FileInputStream("application.properties"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	String dbUrl = dbProperty.getProperty("connection.url");
+    	String dbName = dbProperty.getProperty("connection.name");
+    	String dbPassword = dbProperty.getProperty("connection.password");
+    	
         try (Scanner sc = new Scanner(System.in);
-             Connection dbConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/first", "root", "1210")) {
+             Connection dbConnection = DriverManager.getConnection(dbUrl, dbName, dbPassword)) {
 
             int choice;
             do {

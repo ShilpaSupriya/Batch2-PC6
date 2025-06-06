@@ -1,8 +1,12 @@
 package org.assignments.day1;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Properties;
 import java.util.Scanner;
 //import java.sql.SQLException;
 //import java.sql.Statement;
@@ -10,7 +14,18 @@ import java.util.Scanner;
 public class Assignment1 {
 
 	public static void main(String[] args) {
-		try (Connection dbConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webjavab2", "root", "cdac");
+		Properties dbProperty = new Properties();
+    	try {
+			dbProperty.load(new FileInputStream("application.properties"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	String dbUrl = dbProperty.getProperty("connection.url");
+    	String dbName = dbProperty.getProperty("connection.name");
+    	String dbPassword = dbProperty.getProperty("connection.password");
+		try (Connection dbConnection = DriverManager.getConnection(dbUrl, dbName, dbPassword);
 				PreparedStatement psSelect = dbConnection.prepareStatement("select * from users where username = ?");
 				PreparedStatement psInsert = dbConnection.prepareStatement("INSERT INTO USERS VALUES (?,?,?,?,?)");
 				PreparedStatement psSearch = dbConnection.prepareStatement("SELECT * FROM USERS WHERE CITY = ?");
