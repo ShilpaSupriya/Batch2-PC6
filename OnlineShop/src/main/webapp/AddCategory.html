@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Category</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f9f9f9;
+            padding: 40px;
+        }
+        form {
+            width: 400px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        label, input {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="AddCategory" method="post">
+        <h2>Add New Category</h2>
+        <label>Category ID:</label>
+        <input type="number" name="categoryId" required />
+
+        <label>Category Name:</label>
+        <input type="text" name="categoryName" required />
+
+        <label>Category Description:</label>
+        <input type="text" name="categoryDesc" required />
+
+        <label>Category Image Filename:</label>
+        <input type="text" name="categoryImg" placeholder="e.g. electronics.jpg" required />
+
+        <input type="submit" value="Add Category" />
+    </form>
+
+</body>
+</html>
